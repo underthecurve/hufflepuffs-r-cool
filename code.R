@@ -94,17 +94,43 @@ ggsave('barplot.png', width = 8, height = 3)
 ggplot(series %>% filter(is.na(house) ==  F), 
                aes(x = rank/total.words, xend = rank/total.words, 
                    y = 2, yend = 1, colour = house)) + 
+  geom_segment(alpha = .5) +
+  facet_wrap(.~book, nrow = 7) +
+  scale_x_continuous(labels = scales::percent, limits = c(0, 1)) +
+  labs(y = '', x = '\nChapter progression') +
+  scale_colour_manual(values = c('#7F0909', '#ecb939', '#000A90', '#1a472a')) +
+  theme(plot.background = element_rect(fill = "white"), 
+        panel.grid.major.y = element_blank(),
+        axis.ticks = element_blank(),
+        panel.grid.minor.y = element_blank(),
+        strip.background = element_blank(), 
+        axis.text.y = element_blank(), 
+        axis.text.x = element_text(size = 10), 
+        axis.title = element_text(size = 10, color = 'gray26'),
+        strip.text = element_text(size = 13, face = 'bold'),
+        legend.position = 'none', 
+        panel.background = element_blank())
+
+ggplot(series %>% filter(is.na(house) ==  F), 
+       aes(x = rank/total.words, xend = rank/total.words, 
+           y = 2, yend = 1, colour = house)) + 
   geom_segment(alpha=.75) +
   facet_grid(house~book, switch = 'y') +
+  scale_x_continuous(labels = scales::percent, limits = c(0, 1), breaks = seq(0, 1, .5)) +
+  labs(y = '', x = '\nChapter progression') +
   scale_colour_manual(values = c('#7F0909', '#ecb939', '#222f5b', '#1a472a')) +
   theme(plot.background = element_rect(fill = "white"), 
         panel.grid.major.y = element_blank(),
+        axis.ticks = element_blank(),
         panel.grid.minor.y = element_blank(),
-        axis.text.y = element_text(size = 12), 
-        axis.text.x = element_text(size = 10), 
+        # strip.background = element_blank(), 
+        axis.text.y = element_blank(), 
+        panel.spacing = unit(.5, "lines"),
+        axis.text.x = element_text(size = 8), 
         axis.title = element_text(size = 10, color = 'gray26'),
-        plot.title = element_text(size = 18, face = 'bold'),
-        strip.text = element_text(size = 13, face = 'bold'),
+        strip.text.x = element_text(size = 10, face = 'bold'),
+        strip.text.y = element_text(size = 10, face = 'bold', angle = 180),
         legend.position = 'none', 
-        panel.background = element_blank(),
-        plot.caption = element_text(hjust = -.01, color = 'gray47', size = 9))
+        panel.background = element_blank())
+
+ggsave('stripplot.png', width = 16, height = 2)
