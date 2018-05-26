@@ -89,7 +89,6 @@ ggsave('barplot.png', width = 8, height = 3)
 
 ## plot it: barcode/segment plot (https://twitter.com/christinezhang/status/995441946599534592)
 ## code inspired by: https://lsru.github.io/tv_course/TD_ggplot2_solution.html
-## to be continued
 
 ggplot(series %>% filter(is.na(house) ==  F), 
                aes(x = rank/total.words, xend = rank/total.words, 
