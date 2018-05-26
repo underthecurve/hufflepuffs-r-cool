@@ -90,6 +90,7 @@ ggsave('barplot.png', width = 8, height = 3)
 ## plot it: barcode/segment plot (https://twitter.com/christinezhang/status/995441946599534592)
 ## code inspired by: https://lsru.github.io/tv_course/TD_ggplot2_solution.html
 
+# this is too messy (with segments on top of one another)
 ggplot(series %>% filter(is.na(house) ==  F), 
                aes(x = rank/total.words, xend = rank/total.words, 
                    y = 2, yend = 1, colour = house)) + 
@@ -110,6 +111,7 @@ ggplot(series %>% filter(is.na(house) ==  F),
         legend.position = 'none', 
         panel.background = element_blank())
 
+# use this one instead (with segments separated by House)
 ggplot(series %>% filter(is.na(house) ==  F), 
        aes(x = rank/total.words, xend = rank/total.words, 
            y = 2, yend = 1, colour = house)) + 
